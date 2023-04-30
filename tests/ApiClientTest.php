@@ -14,7 +14,7 @@ class ApiClientTest extends TestCase
 
     public function testGenerateRouteMethod()
     {
-        $client = new ApiClient(ApiClient::DEFAULT_API_TOKEN_TEST, ApiClient::DEFAULT_API_URL_TEST, new Client);
+        $client = new ApiClient(ApiClient::DEFAULT_API_TOKEN_TEST, ApiClient::DEFAULT_API_URL_TEST, new Client());
 
         $routeUrl = $client->generateUrl(new ApiAllUsersRoute());
 
@@ -23,7 +23,7 @@ class ApiClientTest extends TestCase
 
     public function testGenerateOptionsMethod()
     {
-        $client = new ApiClient(ApiClient::DEFAULT_API_TOKEN_TEST, ApiClient::DEFAULT_API_URL_TEST, new Client);
+        $client = new ApiClient(ApiClient::DEFAULT_API_TOKEN_TEST, ApiClient::DEFAULT_API_URL_TEST, new Client());
 
         $options = $client->generateOptions([]);
 
