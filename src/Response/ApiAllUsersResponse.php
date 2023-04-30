@@ -8,11 +8,10 @@ class ApiAllUsersResponse extends ApiResponse
 {
     private int $dataCount = 0;
 
+    /** @var User[] */
     private array $users = [];
 
-    /**
-     * @param User[] $users
-     */
+    /** @param User[] $users */
     public function __construct(string $errorMessage, int $errorCode, User ...$users)
     {
         parent::__construct($errorMessage, $errorCode);
@@ -26,6 +25,7 @@ class ApiAllUsersResponse extends ApiResponse
         return $this->dataCount;
     }
 
+    /** @return User[] */
     public function getUsers(): array
     {
         return $this->users;
