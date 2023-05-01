@@ -4,6 +4,7 @@ namespace NystronSolar\GrowattApi\Response;
 
 use NystronSolar\GrowattApi\Entity\Plant;
 use NystronSolar\GrowattApi\Helper\TypeHelper;
+use Psr\Http\Message\ResponseInterface;
 
 class ApiUserPlantsResponse extends ApiResponse
 {
@@ -13,9 +14,9 @@ class ApiUserPlantsResponse extends ApiResponse
     private array $plants = [];
 
     /** @param Plant[] $plants */
-    public function __construct(string $errorMessage, int $errorCode, Plant ...$plants)
+    public function __construct(ResponseInterface $httpResponse, string $errorMessage, int $errorCode, \stdClass $responseJson, Plant ...$plants)
     {
-        parent::__construct($errorMessage, $errorCode);
+        parent::__construct($httpResponse, $errorMessage, $errorCode, $responseJson);
 
         $this->plants = $plants;
         $this->dataCount = count($plants);
@@ -32,13 +33,14 @@ class ApiUserPlantsResponse extends ApiResponse
         return $this->plants;
     }
 
-    public static function generate(object $responseJson): ApiUserPlantsResponse|false
+    public static function generate(ResponseInterface $httpResponse): ApiUserPlantsResponse|false
     {
-        $primitiveApiResponse = parent::generate($responseJson);
+        $primitiveApiResponse = parent::generate($httpResponse);
         if (!$primitiveApiResponse) {
             return false;
         }
 
+        $responseJson = $primitiveApiResponse->getResponseJson();
         $errorMessage = $primitiveApiResponse->getErrorMessage();
         $errorCode = $primitiveApiResponse->getErrorCode();
 
@@ -83,8 +85,10 @@ class ApiUserPlantsResponse extends ApiResponse
         }
 
         return new ApiUserPlantsResponse(
+            $httpResponse,
             $errorMessage,
             $errorCode,
+            $responseJson,
             ...$plants
         );
     }

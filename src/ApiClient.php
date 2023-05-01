@@ -71,13 +71,8 @@ class ApiClient
         $client = $this->getGuzzleClient();
 
         $response = $client->request($apiRouteMethod, $route, $options);
-        $responseJson = json_decode($response->getBody()->getContents());
 
-        if (!is_object($responseJson)) {
-            return false;
-        }
-
-        $apiResponse = $apiResponseClass::generate($responseJson);
+        $apiResponse = $apiResponseClass::generate($response);
 
         return $apiResponse;
     }
