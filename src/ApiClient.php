@@ -48,17 +48,23 @@ class ApiClient
         return sprintf('%s/%s/%s', $apiUrl, $apiVersion, $route);
     }
 
-    public function generateOptions(array $headers): array
+    public function generateOptions(array $formParams = []): array
     {
-        $headers['token'] = $this->getApiToken();
-        $options = ['headers' => $headers];
+        $headers = [
+            'token' => $this->getApiToken(),
+        ];
+
+        $options = [
+            'headers' => $headers,
+            'form_params' => $formParams,
+        ];
 
         return $options;
     }
 
-    public function makeRequest(ApiRoute $apiRoute, array $parameters = []): ApiResponse|false
+    public function makeRequest(ApiRoute $apiRoute, array $params = []): ApiResponse|false
     {
-        $options = $this->generateOptions($parameters);
+        $options = $this->generateOptions($params);
         $apiRouteMethod = $apiRoute->getRequestMethod();
         $apiResponseClass = $apiRoute->getApiResponse();
         $route = $this->generateUrl($apiRoute);
