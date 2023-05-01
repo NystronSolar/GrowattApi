@@ -2,6 +2,8 @@
 
 namespace NystronSolar\GrowattApi\Response;
 
+use NystronSolar\GrowattApi\Helper\TypeHelper;
+
 class ApiResponse
 {
     private string $errorMessage;
@@ -31,13 +33,8 @@ class ApiResponse
 
     public static function generate(object $responseJson): ApiResponse|false
     {
-        /** @var mixed */
-        $errorMessage = $responseJson->error_msg ?? '';
-        $errorMessage = is_string($errorMessage) ? $errorMessage : '';
-
-        /** @var mixed */
-        $errorCode = $responseJson->error_code ?? 0;
-        $errorCode = is_int($errorCode) ? $errorCode : 0;
+        $errorMessage = TypeHelper::castToString($responseJson->error_msg);
+        $errorCode = TypeHelper::castToInt($responseJson->error_code);
 
         return new ApiResponse($errorMessage, $errorCode);
     }

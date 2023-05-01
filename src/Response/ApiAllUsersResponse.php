@@ -3,6 +3,7 @@
 namespace NystronSolar\GrowattApi\Response;
 
 use NystronSolar\GrowattApi\Entity\User;
+use NystronSolar\GrowattApi\Helper\TypeHelper;
 
 class ApiAllUsersResponse extends ApiResponse
 {
@@ -41,34 +42,22 @@ class ApiAllUsersResponse extends ApiResponse
         $errorMessage = $primitiveApiResponse->getErrorMessage();
         $errorCode = $primitiveApiResponse->getErrorCode();
 
-        /** @var mixed */
-        $data = $responseJson->data ?? new \stdClass();
-        $data = is_object($data) ? $data : new \stdClass();
-
-        /** @var mixed */
-        $count = $data->count ?? 0;
-        $count = is_int($count) ? $count : 0;
-
-        /** @var mixed */
-        $users = $data->c_user ?? [];
+        $data = TypeHelper::castToObject($responseJson->data);
+        $count = TypeHelper::castToInt($data->count);
         /** @var object[] */
-        $rawUsers = is_array($users) ? $users : [];
+        $rawUsers = TypeHelper::castToArray($data->c_user);
 
         /** @var User[] */
         $users = [];
 
         foreach ($rawUsers as $rawUser) {
-            $id = $rawUser->c_user_id;
-            $name = $rawUser->c_user_name;
-            $email = $rawUser->c_user_email;
-            $telephone = $rawUser->c_user_tel;
-            $registerTime = $rawUser->c_user_regtime;
             if (
-                !is_int($id) ||
-                !is_string($name) ||
-                !is_string($email) ||
-                !is_string($telephone) ||
-                !is_string($registerTime)
+                // Typed Doc blocks are added here for PSALM, when using it outside the If, when creating the User instance
+                !TypeHelper::isInt(/** @var int $id */ $id = $rawUser->c_user_id) ||
+                !TypeHelper::isString(/** @var string $name */ $name = $rawUser->c_user_name) ||
+                !TypeHelper::isString(/** @var string $email */ $email = $rawUser->c_user_email) ||
+                !TypeHelper::isString(/** @var string $telephone */ $telephone = $rawUser->c_user_tel) ||
+                !TypeHelper::isString(/** @var string $registerTime */ $registerTime = $rawUser->c_user_regtime)
             ) {
                 return false;
             }
