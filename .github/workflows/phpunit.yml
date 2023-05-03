@@ -1,23 +1,22 @@
 name: PHP Unit
-
-on: [push, pull_request]
-
+on: pull_request
 permissions:
   contents: read
 
 jobs:
-  build:
+  php-unit:
+    name: PHP Unit
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: shivammathur/setup-php@v2
+    - name: Checkout Code
+      uses: actions/checkout@v3
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
       with:
         php-version: '8.2'
-
-    - name: Validate composer.json and composer.lock
+    - name: Validate Composer Files
       run: composer validate --strict
-
-    - name: Cache Composer packages
+    - name: Cache Composer Packages
       id: composer-cache
       uses: actions/cache@v3
       with:
@@ -25,9 +24,8 @@ jobs:
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-php-
-
-    - name: Install dependencies
+    - name: Install Dependencies
       run: composer install --prefer-dist --no-progress
 
-    - name: Run test suite
+    - name: Run Tests
       run: vendor/bin/phpunit tests/

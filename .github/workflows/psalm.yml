@@ -1,14 +1,13 @@
 name: Psalm
-
-on: [push, pull_request]
-
+on: pull_request
+permissions:
+  contents: read
 jobs:
   psalm:
     name: Psalm
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Psalm
-        uses: docker://ghcr.io/psalm/psalm-github-actions
+    - name: Checkout Code
+      uses: actions/checkout@v2
+    - name: Run Psalm
+      uses: docker://ghcr.io/psalm/psalm-github-actions
