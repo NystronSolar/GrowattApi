@@ -23,7 +23,7 @@ class ApiClientTest extends TestCase
 
         $options = $client->generateOptions([]);
 
-        $this->assertSame(['headers' => ['token' => ApiClient::DEFAULT_API_TOKEN_TEST], 'form_params' => []], $options);
+        $this->assertSame(['headers' => ['token' => ApiClient::DEFAULT_API_TOKEN_TEST], 'query' => []], $options);
     }
 
     public function testGenerateOptionsMethodWithParams()
@@ -34,6 +34,6 @@ class ApiClientTest extends TestCase
 
         $options = $client->generateOptions($params);
 
-        $this->assertSame(['headers' => ['token' => ApiClient::DEFAULT_API_TOKEN_TEST], 'form_params' => $params], $options);
+        $this->assertSame(['headers' => ['token' => ApiClient::DEFAULT_API_TOKEN_TEST], 'query' => $params], $options);
     }
 }
