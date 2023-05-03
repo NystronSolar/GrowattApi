@@ -48,7 +48,7 @@ class ApiClient
         return sprintf('%s/%s/%s', $apiUrl, $apiVersion, $route);
     }
 
-    public function generateOptions(array $formParams = []): array
+    public function generateOptions(array $queryParams = []): array
     {
         $headers = [
             'token' => $this->getApiToken(),
@@ -56,7 +56,7 @@ class ApiClient
 
         $options = [
             'headers' => $headers,
-            'form_params' => $formParams,
+            'query' => $queryParams,
         ];
 
         return $options;
