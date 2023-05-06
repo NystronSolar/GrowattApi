@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests;
+namespace NystronSolar\GrowattApiTests;
 
 use NystronSolar\GrowattApi\ApiClient;
 use NystronSolar\GrowattApi\Route\ApiAllUsersRoute;

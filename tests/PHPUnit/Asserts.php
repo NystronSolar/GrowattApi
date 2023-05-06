@@ -1,6 +1,6 @@
 <?php
 
-namespace NystronSolar\GrowattApi\Tests\PHPUnit;
+namespace NystronSolar\GrowattApiTests\PHPUnit;
 
 trait Asserts
 {
