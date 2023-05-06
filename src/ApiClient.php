@@ -62,8 +62,9 @@ class ApiClient
         return $options;
     }
 
-    public function makeRequest(ApiRoute $apiRoute, array $params = []): ApiResponse|false
+    public function makeRequest(ApiRoute $apiRoute): ApiResponse|false
     {
+        $params = $apiRoute->getAllParams();
         $options = $this->generateOptions($params);
         $apiRouteMethod = $apiRoute->getRequestMethod();
         $apiResponseClass = $apiRoute->getApiResponse();
