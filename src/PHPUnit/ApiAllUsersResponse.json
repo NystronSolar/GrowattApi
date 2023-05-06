@@ -1,0 +1,23 @@
+{
+    "error_msg": "",
+    "data": {
+        "c_user": [
+            {
+                "c_user_id": 1,
+                "c_user_regtime": "2023-01-01 01:01:01",
+                "c_user_tel": "",
+                "c_user_email": "user.one@growatt.com",
+                "c_user_name": "Growatt User One"
+            },
+            {
+                "c_user_id": 2,
+                "c_user_regtime": "2023-01-02 01:01:01",
+                "c_user_tel": "",
+                "c_user_email": "user.two@growatt.com",
+                "c_user_name": "Growatt User Two"
+            }
+        ],
+        "count": 2
+    },
+    "error_code": 0
+}
