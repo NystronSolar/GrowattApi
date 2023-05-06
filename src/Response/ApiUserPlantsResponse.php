@@ -8,8 +8,6 @@ use Psr\Http\Message\ResponseInterface;
 
 class ApiUserPlantsResponse extends ApiResponse
 {
-    private int $dataCount = 0;
-
     /** @var Plant[] */
     private array $plants = [];
 
@@ -19,12 +17,6 @@ class ApiUserPlantsResponse extends ApiResponse
         parent::__construct($httpResponse, $errorMessage, $errorCode, $responseJson);
 
         $this->plants = $plants;
-        $this->dataCount = count($plants);
-    }
-
-    public function getDataCount(): int
-    {
-        return $this->dataCount;
     }
 
     /** @return Plant[] */
@@ -45,7 +37,6 @@ class ApiUserPlantsResponse extends ApiResponse
         $errorCode = $primitiveApiResponse->getErrorCode();
 
         $data = TypeHelper::castToObject($responseJson->data);
-        $count = TypeHelper::castToInt($data->count);
         /** @var object[] */
         $rawPlants = TypeHelper::castToArray($data->plants);
 
@@ -78,10 +69,6 @@ class ApiUserPlantsResponse extends ApiResponse
             $plant = new Plant($totalEnergy, $plantId, $country, $city, $imageUrl, $latitude, $currentPower, $locale, (string) $peakPower, $operator, $installer, $userId, $name, $createDate, $status, $longitude);
 
             $plants[] = $plant;
-        }
-
-        if (count($plants) !== $count) {
-            return false;
         }
 
         return new ApiUserPlantsResponse(

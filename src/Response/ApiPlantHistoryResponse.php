@@ -8,8 +8,6 @@ use Psr\Http\Message\ResponseInterface;
 
 class ApiPlantHistoryResponse extends ApiResponse
 {
-    private int $dataCount = 0;
-
     private TimeUnit $timeUnit = TimeUnit::Day;
 
     /** @var Energy[] */
@@ -22,12 +20,6 @@ class ApiPlantHistoryResponse extends ApiResponse
 
         $this->energies = $energies;
         $this->timeUnit = $timeUnit;
-        $this->dataCount = count($energies);
-    }
-
-    public function getDataCount(): int
-    {
-        return $this->dataCount;
     }
 
     public function getTimeUnit(): TimeUnit
@@ -55,10 +47,6 @@ class ApiPlantHistoryResponse extends ApiResponse
         /** @var mixed */
         $data = $responseJson->data ?? new \stdClass();
         $data = is_object($data) ? $data : new \stdClass();
-
-        /** @var mixed */
-        $count = $data->count ?? 0;
-        $count = is_int($count) ? $count : 0;
 
         /** @var mixed */
         $timeUnit = $data->timeUnit ?? '';
@@ -89,10 +77,6 @@ class ApiPlantHistoryResponse extends ApiResponse
             $energy = new Energy($date, $generation);
 
             $energies[] = $energy;
-        }
-
-        if (count($energies) !== $count) {
-            return false;
         }
 
         return new ApiPlantHistoryResponse(
