@@ -8,8 +8,6 @@ use Psr\Http\Message\ResponseInterface;
 
 class ApiAllUsersResponse extends ApiResponse
 {
-    private int $dataCount = 0;
-
     /** @var User[] */
     private array $users = [];
 
@@ -19,12 +17,6 @@ class ApiAllUsersResponse extends ApiResponse
         parent::__construct($httpResponse, $errorMessage, $errorCode, $responseJson);
 
         $this->users = $users;
-        $this->dataCount = count($users);
-    }
-
-    public function getDataCount(): int
-    {
-        return $this->dataCount;
     }
 
     /** @return User[] */
@@ -45,7 +37,6 @@ class ApiAllUsersResponse extends ApiResponse
         $errorCode = $primitiveApiResponse->getErrorCode();
 
         $data = TypeHelper::castToObject($responseJson->data);
-        $count = TypeHelper::castToInt($data->count);
         /** @var object[] */
         $rawUsers = TypeHelper::castToArray($data->c_user);
 
@@ -67,10 +58,6 @@ class ApiAllUsersResponse extends ApiResponse
             $user = new User($id, $name, $email, $telephone, $registerTime);
 
             $users[] = $user;
-        }
-
-        if (count($users) !== $count) {
-            return false;
         }
 
         return new ApiAllUsersResponse(

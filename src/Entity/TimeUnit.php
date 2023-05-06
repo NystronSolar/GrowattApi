@@ -8,5 +8,5 @@ enum TimeUnit: string
 
     case Month = 'month';
 
-    case Year = 'Year';
+    case Year = 'year';
 }

@@ -1,0 +1,18 @@
+{
+    "error_msg": "",
+    "data": {
+        "energys": [
+            {
+                "date": "2023-01-01",
+                "energy": "100"
+            },
+            {
+                "date": "2023-01-02",
+                "energy": "200"
+            }
+        ],
+        "count": 2,
+        "time_unit": "day"
+    },
+    "error_code": 0
+}

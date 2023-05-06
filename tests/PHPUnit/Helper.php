@@ -1,6 +1,6 @@
 <?php
 
-namespace NystronSolar\GrowattApi\Tests;
+namespace NystronSolar\GrowattApiTests\PHPUnit;
 
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
