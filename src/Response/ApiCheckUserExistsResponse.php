@@ -4,7 +4,7 @@ namespace NystronSolar\GrowattApi\Response;
 
 use Psr\Http\Message\ResponseInterface;
 
-class ApiCheckUserResponse extends ApiResponse
+class ApiCheckUserExistsResponse extends ApiResponse
 {
     private bool $userExists;
 
@@ -20,7 +20,7 @@ class ApiCheckUserResponse extends ApiResponse
         return $this->userExists;
     }
 
-    public static function generate(ResponseInterface $httpResponse): ApiCheckUserResponse|false
+    public static function generate(ResponseInterface $httpResponse): ApiCheckUserExistsResponse|false
     {
         $primitiveApiResponse = parent::generate($httpResponse);
         if (!$primitiveApiResponse) {
@@ -32,8 +32,10 @@ class ApiCheckUserResponse extends ApiResponse
         $errorCode = $primitiveApiResponse->getErrorCode();
 
         $userExists = 10003 === $errorCode ? true : false;
+        $errorCode = $userExists ? 0 : $errorCode;
+        $errorMessage = $userExists ? '' : $errorMessage;
 
-        return new ApiCheckUserResponse(
+        return new ApiCheckUserExistsResponse(
             $httpResponse,
             $errorMessage,
             $errorCode,

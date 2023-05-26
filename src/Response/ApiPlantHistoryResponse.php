@@ -44,11 +44,11 @@ class ApiPlantHistoryResponse extends ApiResponse
         $errorMessage = $primitiveApiResponse->getErrorMessage();
         $errorCode = $primitiveApiResponse->getErrorCode();
 
-        /** @var mixed */
+        /** @psalm-var mixed */
         $data = $responseJson->data ?? new \stdClass();
         $data = is_object($data) ? $data : new \stdClass();
 
-        /** @var mixed */
+        /** @psalm-var mixed */
         $timeUnit = $data->timeUnit ?? '';
         $timeUnit = is_string($timeUnit) ? $timeUnit : '';
         $timeUnit = TimeUnit::tryFrom($timeUnit);
@@ -56,7 +56,7 @@ class ApiPlantHistoryResponse extends ApiResponse
             $timeUnit = TimeUnit::Day;
         }
 
-        /** @var mixed */
+        /** @psalm-var mixed */
         $energies = $data->energys ?? [];
         /** @var object[] */
         $rawEnergies = is_array($energies) ? $energies : [];
@@ -68,8 +68,8 @@ class ApiPlantHistoryResponse extends ApiResponse
             $date = $rawEnergy->date;
             $generation = $rawEnergy->energy;
             if (
-                !is_string($date) ||
-                !is_string($generation)
+                !is_string($date)
+                || !is_string($generation)
             ) {
                 return false;
             }
