@@ -8,6 +8,7 @@ use NystronSolar\GrowattApi\Entity\TimeUnit;
 use NystronSolar\GrowattApi\Response\ApiAllUsersResponse;
 use NystronSolar\GrowattApi\Response\ApiCheckUserExistsResponse;
 use NystronSolar\GrowattApi\Response\ApiPlantHistoryResponse;
+use NystronSolar\GrowattApi\Response\ApiUserPlantsResponse;
 use Psr\Http\Message\ResponseInterface;
 
 interface ApiClientInterface
