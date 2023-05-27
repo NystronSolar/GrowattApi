@@ -52,4 +52,11 @@ interface ApiClientInterface
      * @param int<1, 100>  $perPage
      */
     public function getPlantHistoryRequest(int $plantId, TimeUnit $timeUnit, \DateTimeImmutable $startDate, int $intervalDays = 7, int $page = 1, int $perPage = 20): ApiPlantHistoryResponse|false;
+
+    /**
+     * @param non-empty-string $userName
+     * @param positive-int     $page
+     * @param int<1, 100>      $perPage
+     */
+    public function getUserPlantsRequest(string $userName, int $page = 1, int $perPage = 20): ApiUserPlantsResponse|false;
 }
