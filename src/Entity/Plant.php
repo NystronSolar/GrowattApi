@@ -2,7 +2,7 @@
 
 namespace NystronSolar\GrowattApi\Entity;
 
-use NystronSolar\GrowattApi\ApiClient;
+use NystronSolar\GrowattApi\Client\ApiClientInterface;
 
 class Plant
 {
@@ -57,12 +57,12 @@ class Plant
         $this->longitude = $longitude;
 
         $createDateObj = \DateTimeImmutable::createFromFormat(
-            ApiClient::DATE_FORMAT,
+            ApiClientInterface::DATE_FORMAT,
             $createDate
         );
 
         if (!$createDateObj) {
-            throw new \Exception(sprintf('Time Format cannot be created with "%s" format and "%s" value', ApiClient::TIME_FORMAT, $createDate));
+            throw new \Exception(sprintf('Time Format cannot be created with "%s" format and "%s" value', ApiClientInterface::TIME_FORMAT, $createDate));
         }
 
         $this->createDate = $createDateObj;

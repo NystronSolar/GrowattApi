@@ -2,7 +2,7 @@
 
 namespace NystronSolar\GrowattApi\Entity;
 
-use NystronSolar\GrowattApi\ApiClient;
+use NystronSolar\GrowattApi\Client\ApiClientInterface;
 
 class User
 {
@@ -24,12 +24,12 @@ class User
         $this->telephone = $telephone;
 
         $registerTimeObj = \DateTimeImmutable::createFromFormat(
-            ApiClient::TIME_FORMAT,
+            ApiClientInterface::TIME_FORMAT,
             $registerTime
         );
 
         if (!$registerTimeObj) {
-            throw new \Exception(sprintf('Time Format cannot be created with "%s" format and "%s" value', ApiClient::TIME_FORMAT, $registerTime));
+            throw new \Exception(sprintf('Time Format cannot be created with "%s" format and "%s" value', ApiClientInterface::TIME_FORMAT, $registerTime));
         }
 
         $this->registerTime = $registerTimeObj;

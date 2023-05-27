@@ -46,11 +46,11 @@ class ApiAllUsersResponse extends ApiResponse
         foreach ($rawUsers as $rawUser) {
             if (
                 // Typed Doc blocks are added here for PSALM, when using it outside the If, when creating the User instance
-                !TypeHelper::isInt(/** @var int $id */ $id = $rawUser->c_user_id) ||
-                !TypeHelper::isString(/** @var string $name */ $name = $rawUser->c_user_name) ||
-                !TypeHelper::isString(/** @var string $email */ $email = $rawUser->c_user_email) ||
-                !TypeHelper::isString(/** @var string $telephone */ $telephone = $rawUser->c_user_tel) ||
-                !TypeHelper::isString(/** @var string $registerTime */ $registerTime = $rawUser->c_user_regtime)
+                !TypeHelper::isInt(/** @var int $id */ $id = $rawUser->c_user_id)
+                || !TypeHelper::isString(/** @var string $name */ $name = $rawUser->c_user_name)
+                || !TypeHelper::isString(/** @var string $email */ $email = $rawUser->c_user_email)
+                || !TypeHelper::isString(/** @var string $telephone */ $telephone = $rawUser->c_user_tel)
+                || !TypeHelper::isString(/** @var string $registerTime */ $registerTime = $rawUser->c_user_regtime)
             ) {
                 return false;
             }

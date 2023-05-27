@@ -2,7 +2,7 @@
 
 namespace NystronSolar\GrowattApi\Entity;
 
-use NystronSolar\GrowattApi\ApiClient;
+use NystronSolar\GrowattApi\Client\ApiClientInterface;
 
 class Energy
 {
@@ -15,12 +15,12 @@ class Energy
         $this->generation = $generation;
 
         $dateObj = \DateTimeImmutable::createFromFormat(
-            ApiClient::DATE_FORMAT,
+            ApiClientInterface::DATE_FORMAT,
             $date
         );
 
         if (!$dateObj) {
-            throw new \Exception(sprintf('Time Format cannot be created with "%s" format and "%s" value', ApiClient::TIME_FORMAT, $date));
+            throw new \Exception(sprintf('Time Format cannot be created with "%s" format and "%s" value', ApiClientInterface::TIME_FORMAT, $date));
         }
 
         $this->date = $dateObj;
