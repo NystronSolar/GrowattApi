@@ -69,12 +69,12 @@ class ApiPlantHistoryResponse extends ApiResponse
             $generation = $rawEnergy->energy;
             if (
                 !is_string($date)
-                || !is_string($generation)
+                || !is_numeric($generation)
             ) {
                 return false;
             }
 
-            $energy = new Energy($date, $generation);
+            $energy = new Energy($date, (string) $generation);
 
             $energies[] = $energy;
         }
