@@ -104,7 +104,7 @@ class GrowattApiClient implements ApiClientInterface
             'user/c_user_list',
             [
                 'page' => $this->validatePage($page),
-                'perPage' => $this->validatePerPage($perPage),
+                'perpage' => $this->validatePerPage($perPage),
             ],
         );
 
@@ -174,7 +174,7 @@ class GrowattApiClient implements ApiClientInterface
             [
                 'user_name' => $userName,
                 'page' => $this->validatePage($page),
-                'perPage' => $this->validatePerPage($perPage),
+                'perpage' => $this->validatePerPage($perPage),
             ],
         );
 
