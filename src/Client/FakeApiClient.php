@@ -91,11 +91,26 @@ class FakeApiClient implements ApiClientInterface
      */
     public function getPlantHistoryRequest(int $plantId, TimeUnit $timeUnit, \DateTimeImmutable $startDate, int $intervalDays = 7, int $page = 1, int $perPage = 20): ApiPlantHistoryResponse|false
     {
+        $str = '[';
+        for ($i = 0; $i < $intervalDays; ++$i) {
+            $g = rand(100, 300);
+            $g = bcdiv((string) $g, '10', 1);
+            $d = $startDate->modify("+$i day");
+            if (!$d) {
+                throw new \Exception('Code can\'t reach here!');
+            }
+            $str .= '{"date": "'.$d->format('Y-m-d').'","energy": "'.$g.'"}';
+
+            if ($i !== ($intervalDays - 1)) {
+                $str .= ',';
+            }
+        }
+        $str .= ']';
         $responseBody = match ($plantId) {
-            1 => '{"error_msg": "","data": {"energys": [{"date": "2023-01-01","energy": "11.3"},{"date": "2023-01-02","energy": "13.5"},{"date": "2023-01-03","energy": "19.6"},{"date": "2023-01-04","energy": "12.3"},{"date": "2023-01-05","energy": "23.1"},{"date": "2023-01-06","energy": "13.7"},{"date": "2023-01-07","energy": "15.3"}],"count": 7,"time_unit": "day"},"error_code": 0}',
-            2 => '{"error_msg": "","data": {"energys": [{"date": "2023-01-01","energy": "23.4"},{"date": "2023-01-02","energy": "23.2"},{"date": "2023-01-03","energy": "23.1"},{"date": "2023-01-04","energy": "15.7"},{"date": "2023-01-05","energy": "19.2"},{"date": "2023-01-06","energy": "16.1"},{"date": "2023-01-07","energy": "17.7"}],"count": 7,"time_unit": "day"},"error_code": 0}',
-            3 => '{"error_msg": "","data": {"energys": [{"date": "2023-01-01","energy": "32.6"},{"date": "2023-01-02","energy": "21.6"},{"date": "2023-01-03","energy": "32.1"},{"date": "2023-01-04","energy": "11.3"},{"date": "2023-01-05","energy": "14.7"},{"date": "2023-01-06","energy": "21.6"},{"date": "2023-01-07","energy": "14.9"}],"count": 7,"time_unit": "day"},"error_code": 0}',
-            4 => '{"error_msg": "","data": {"energys": [{"date": "2023-01-01","energy": "12.5"},{"date": "2023-01-02","energy": "10.9"},{"date": "2023-01-03","energy": "12.3"},{"date": "2023-01-04","energy": "19.5"},{"date": "2023-01-05","energy": "12.6"},{"date": "2023-01-06","energy": "15.7"},{"date": "2023-01-07","energy": "18.7"}],"count": 7,"time_unit": "day"},"error_code": 0}',
+            1 => '{"error_msg": "","data": {"energys": '.$str.',"count": 7,"time_unit": "day"},"error_code": 0}',
+            2 => '{"error_msg": "","data": {"energys": '.$str.',"count": 7,"time_unit": "day"},"error_code": 0}',
+            3 => '{"error_msg": "","data": {"energys": '.$str.',"count": 7,"time_unit": "day"},"error_code": 0}',
+            4 => '{"error_msg": "","data": {"energys": '.$str.',"count": 7,"time_unit": "day"},"error_code": 0}',
             default => '{"error_msg":"error_Plant does not exist","data":"","error_code":10002}'
         };
 

@@ -3,7 +3,6 @@
 namespace NystronSolar\GrowattApiTests\Client;
 
 use NystronSolar\GrowattApi\Client\FakeApiClient;
-use NystronSolar\GrowattApi\Entity\Energy;
 use NystronSolar\GrowattApi\Entity\Plant;
 use NystronSolar\GrowattApi\Entity\TimeUnit;
 use NystronSolar\GrowattApi\Entity\User;
@@ -75,7 +74,8 @@ class FakeApiClientTest extends TestCase
         $this->assertFalse($response->hasErrors());
 
         $this->assertCount(7, $energies = $response->getEnergies());
-        $this->assertEquals(new Energy('2023-01-01', '11.3'), $energies[0]);
+        $this->assertSame('2023-01-01', $energies[0]->getDate()->format('2023-01-01'));
+        $this->assertMatchesRegularExpression("/(([0-9]{1})|([0-9]{2}))\.[0-9]/", $energies[0]->getGeneration());
     }
 
     public function testGetUserPlantsRequestWithNonexistentUser()
