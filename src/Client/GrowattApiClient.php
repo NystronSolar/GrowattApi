@@ -141,7 +141,7 @@ class GrowattApiClient implements ApiClientInterface
         $intervalDaysPositive = IntHelper::negativeToOne($intervalDays);
         $intervalDaysLimited = IntHelper::limitTo($intervalDaysPositive, 7);
 
-        $intervalDaysObject = new \DateInterval(sprintf('P%sD', $intervalDaysLimited));
+        $intervalDaysObject = new \DateInterval(sprintf('P%sD', $intervalDaysLimited - 1));
         $endDate = $startDate->add($intervalDaysObject);
 
         $response = $this->makeRequest(
