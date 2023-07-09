@@ -1,7 +1,7 @@
 {
     "name": "nystronsolar/growatt-api",
     "description": "PHP Client for the Growatt API",
-    "license": "GPL-3.0-only",
+    "license": "MIT",
     "homepage": "https://github.com/NystronSolar/GrowattApi",
     "minimum-stability": "stable",
     "prefer-stable": true,
