@@ -24,10 +24,6 @@ class Plant
 
     private string $peakPower;
 
-    private string $operator;
-
-    private string $installer;
-
     private int $userId;
 
     private string $name;
@@ -38,7 +34,7 @@ class Plant
 
     private string $longitude;
 
-    public function __construct(string $totalEnergy, int $plantId, string $country, string $city, ?string $imageUrl, string $latitude, string $currentPower, string $locale, string $peakPower, string $operator, string $installer, int $userId, string $name, string $createDate, int $status, string $longitude)
+    public function __construct(string $totalEnergy, int $plantId, string $country, string $city, ?string $imageUrl, string $latitude, string $currentPower, string $locale, string $peakPower, int $userId, string $name, string $createDate, int $status, string $longitude)
     {
         $this->totalEnergy = $totalEnergy;
         $this->plantId = $plantId;
@@ -49,8 +45,6 @@ class Plant
         $this->currentPower = $currentPower;
         $this->locale = $locale;
         $this->peakPower = $peakPower;
-        $this->operator = $operator;
-        $this->installer = $installer;
         $this->userId = $userId;
         $this->name = $name;
         $this->status = $status;
@@ -111,16 +105,6 @@ class Plant
     public function getPeakPower(): string
     {
         return $this->peakPower;
-    }
-
-    public function getOperator(): string
-    {
-        return $this->operator;
-    }
-
-    public function getInstaller(): string
-    {
-        return $this->installer;
     }
 
     public function getUserId(): int
