@@ -55,8 +55,6 @@ class ApiUserPlantsResponse extends ApiResponse
                 || !TypeHelper::isString(/** @var string $currentPower */ $currentPower = $rawPlant->current_power)
                 || !TypeHelper::isString(/** @var string $locale */ $locale = $rawPlant->locale)
                 || !TypeHelper::isFloat(/** @var float $peakPower */ $peakPower = $rawPlant->peak_power)
-                || !TypeHelper::isString(/** @var string $operator */ $operator = $rawPlant->operator)
-                || !TypeHelper::isString(/** @var string $installer */ $installer = $rawPlant->installer)
                 || !TypeHelper::isInt(/** @var int $userId */ $userId = $rawPlant->user_id)
                 || !TypeHelper::isString(/** @var string $name */ $name = $rawPlant->name)
                 || !TypeHelper::isString(/** @var string $createDate */ $createDate = $rawPlant->create_date)
@@ -66,7 +64,7 @@ class ApiUserPlantsResponse extends ApiResponse
                 return false;
             }
 
-            $plant = new Plant($totalEnergy, $plantId, $country, $city, $imageUrl, $latitude, $currentPower, $locale, (string) $peakPower, $operator, $installer, $userId, $name, $createDate, $status, $longitude);
+            $plant = new Plant($totalEnergy, $plantId, $country, $city, $imageUrl, $latitude, $currentPower, $locale, (string) $peakPower, $userId, $name, $createDate, $status, $longitude);
 
             $plants[] = $plant;
         }
