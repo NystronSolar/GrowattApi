@@ -5,3 +5,21 @@
 [![PsalmBadge](https://img.shields.io/badge/📌%20Psalm-Static%20Analysis-red?style=for-the-badge)](https://psalm.dev/)
 
 `composer require nystronsolar/growatt-api`
+
+## APIs
+
+### Growatt
+
+The following resources relate to the Growatt API and its documentation.
+> ⚠️ In some repositories, API keys are not required, so the usage of these projects may differ from the official API specifications.
+
+#### Oficial Documentations
+
+- [API Interface Documentation](https://growatt.pl/wp-content/uploads/2020/01/Growatt-Server-API-Guide.pdf)
+- [Growatt Power station monitoring - OpenAPI Protocol standards](https://growatt.pl/wp-content/uploads/2020/01/Growatt-Server-Open-API-protocol-standards.pdf)
+- [Showdoc](https://www.showdoc.com.cn/262556420217021/1494053950115877) (Password: `123456`)
+
+#### Repositories
+
+- [Growatt API Client for .NET](https://github.com/ealse/GrowattApi)
+- [Growatt Inverter Monitor](https://github.com/johanmeijer/grott)
